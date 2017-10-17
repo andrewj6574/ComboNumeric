@@ -24,18 +24,25 @@ class GameScene: SKScene {
         
         for touch in touches {
             let location = touch.locationInNode(self)
+            let label = SKLabelNode(fontNamed:"Arial")
             
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
+            label.position = location
+            label.fontSize = 12;
+            label.text = String(Int(location.x)) + ", " + String(Int(location.y))
             
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
+            self.addChild(label)
             
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
+//            let sprite = SKSpriteNode(imageNamed:"Spaceship")
+//            
+//            sprite.xScale = 0.5
+//            sprite.yScale = 0.5
+//            sprite.position = location
+//            
+//            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
+//            	
+//            sprite.runAction(SKAction.repeatActionForever(action))
+//            
+//            self.addChild(sprite)
         }
     }
    
