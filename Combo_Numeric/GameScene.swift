@@ -9,26 +9,37 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
+    
+    var vc = UIViewController();
+    var dictionary = Lexicontext.sharedDictionary();
+    
+    private func getWord() -> String? {
+        return dictionary?.randomWord();
+    }
+    
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
         myLabel.text = "Hello, World!"
         myLabel.fontSize = 45
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
+        myLabel.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
         
         self.addChild(myLabel)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        /* Called when a touch begins */
+        // obtain a referece to Lexicotext
         
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             let label = SKLabelNode(fontNamed:"Arial")
+            let word = getWord();
             
             label.position = location
-            label.fontSize = 12;
-            label.text = String(Int(location.x)) + ", " + String(Int(location.y))
+            label.fontSize = 12
+            label.text = String(Int(location.x)) + ", " + String(Int(location.y));
+            label.text?.append(word ?? "")
             
             self.addChild(label)
             
@@ -46,7 +57,7 @@ class GameScene: SKScene {
         }
     }
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
 }

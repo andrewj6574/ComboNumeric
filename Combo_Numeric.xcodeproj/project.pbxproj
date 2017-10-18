@@ -15,6 +15,8 @@
 		21689A901F95C49D004B03BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21689A8E1F95C49D004B03BE /* LaunchScreen.storyboard */; };
 		21689A9B1F95C49D004B03BE /* Combo_NumericTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21689A9A1F95C49D004B03BE /* Combo_NumericTests.swift */; };
 		21689AA61F95C49D004B03BE /* Combo_NumericUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21689AA51F95C49D004B03BE /* Combo_NumericUITests.swift */; };
+		2A33EE9C1F971A49005E3949 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2A33EE9B1F971A49005E3949 /* LexicontextAssets.bundle */; };
+		2A33EE9E1F971A6F005E3949 /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A33EE9D1F971A6F005E3949 /* libLexicontext.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,11 @@
 		21689AA11F95C49D004B03BE /* Combo_NumericUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Combo_NumericUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21689AA51F95C49D004B03BE /* Combo_NumericUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combo_NumericUITests.swift; sourceTree = "<group>"; };
 		21689AA71F95C49D004B03BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A33EE971F9718E4005E3949 /* libLexicontext.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLexicontext.a; sourceTree = "<group>"; };
+		2A33EE991F9719BA005E3949 /* Lexicontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lexicontext.h; sourceTree = "<group>"; };
+		2A33EE9A1F971A44005E3949 /* Lexicontext-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lexicontext-Bridging-Header.h"; sourceTree = "<group>"; };
+		2A33EE9B1F971A49005E3949 /* LexicontextAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LexicontextAssets.bundle; sourceTree = "<group>"; };
+		2A33EE9D1F971A6F005E3949 /* libLexicontext.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLexicontext.a; path = Combo_Numeric/libLexicontext.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A33EE9E1F971A6F005E3949 /* libLexicontext.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +91,7 @@
 				21689A991F95C49D004B03BE /* Combo_NumericTests */,
 				21689AA41F95C49D004B03BE /* Combo_NumericUITests */,
 				21689A7F1F95C49D004B03BE /* Products */,
+				2A33EE961F9718E3005E3949 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +108,9 @@
 		21689A801F95C49D004B03BE /* Combo_Numeric */ = {
 			isa = PBXGroup;
 			children = (
+				2A33EE9B1F971A49005E3949 /* LexicontextAssets.bundle */,
+				2A33EE9A1F971A44005E3949 /* Lexicontext-Bridging-Header.h */,
+				2A33EE991F9719BA005E3949 /* Lexicontext.h */,
 				21689A811F95C49D004B03BE /* AppDelegate.swift */,
 				21689A851F95C49D004B03BE /* GameScene.swift */,
 				21689A871F95C49D004B03BE /* GameViewController.swift */,
@@ -126,6 +138,15 @@
 				21689AA71F95C49D004B03BE /* Info.plist */,
 			);
 			path = Combo_NumericUITests;
+			sourceTree = "<group>";
+		};
+		2A33EE961F9718E3005E3949 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A33EE9D1F971A6F005E3949 /* libLexicontext.a */,
+				2A33EE971F9718E4005E3949 /* libLexicontext.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,13 +217,17 @@
 				TargetAttributes = {
 					21689A7D1F95C49D004B03BE = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PMA74ZT569;
+						LastSwiftMigration = 0820;
 					};
 					21689A951F95C49D004B03BE = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 21689A7D1F95C49D004B03BE;
 					};
 					21689AA01F95C49D004B03BE = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 21689A7D1F95C49D004B03BE;
 					};
 				};
@@ -234,6 +259,7 @@
 			files = (
 				21689A901F95C49D004B03BE /* LaunchScreen.storyboard in Resources */,
 				21689A8D1F95C49D004B03BE /* Assets.xcassets in Resources */,
+				2A33EE9C1F971A49005E3949 /* LexicontextAssets.bundle in Resources */,
 				21689A8B1F95C49D004B03BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,10 +431,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PMA74ZT569;
 				INFOPLIST_FILE = Combo_Numeric/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Combo_Numeric",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AJH.Combo-Numeric";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Combo_Numeric/Lexicontext-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -416,10 +450,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = PMA74ZT569;
 				INFOPLIST_FILE = Combo_Numeric/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Combo_Numeric",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AJH.Combo-Numeric";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Combo_Numeric/Lexicontext-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -432,6 +474,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AJH.Combo-NumericTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Combo_Numeric.app/Combo_Numeric";
 			};
 			name = Debug;
@@ -444,6 +487,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AJH.Combo-NumericTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Combo_Numeric.app/Combo_Numeric";
 			};
 			name = Release;
@@ -456,6 +500,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AJH.Combo-NumericUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Combo_Numeric;
 			};
 			name = Debug;
@@ -467,6 +512,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AJH.Combo-NumericUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Combo_Numeric;
 			};
 			name = Release;
@@ -490,6 +536,7 @@
 				21689AAC1F95C49D004B03BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		21689AAD1F95C49D004B03BE /* Build configuration list for PBXNativeTarget "Combo_NumericTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +545,7 @@
 				21689AAF1F95C49D004B03BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		21689AB01F95C49D004B03BE /* Build configuration list for PBXNativeTarget "Combo_NumericUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +554,7 @@
 				21689AB21F95C49D004B03BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
