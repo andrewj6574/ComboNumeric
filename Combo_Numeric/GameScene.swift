@@ -28,7 +28,7 @@ class GameScene: SKScene {
 //    }
     
     override func didMove(to: SKView) {
-        if let grid = Grid(blockSize: 40.0, rows:5, cols:5) {
+        if let grid = Grid(blockSize: 65.0, rows:5, cols:5) {
             grid.position = CGPoint (x:frame.midX, y:frame.midY)
             addChild(grid)
             
@@ -36,6 +36,16 @@ class GameScene: SKScene {
             gamePiece.setScale(0.0625)
             gamePiece.position = grid.gridPosition(row: 1, col: 0)
             grid.addChild(gamePiece)
+            
+            let letter = SKLabelNode(fontNamed: "ArialMT")
+            letter.text = "Y"
+            letter.fontSize = 30
+            letter.fontColor = SKColor.white
+            letter.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+            letter.position = grid.gridPosition(row: 2, col: 0)
+
+            
+            grid.addChild(letter)
         }
     }
     
