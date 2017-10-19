@@ -40,6 +40,7 @@ class GameScene: SKScene {
             label.fontSize = 12
             label.text = String(Int(location.x)) + ", " + String(Int(location.y));
             label.text?.append(word ?? "")
+            label.text?.append(RandomCharacter());
             
             self.addChild(label)
             

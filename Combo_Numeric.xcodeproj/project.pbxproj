@@ -15,6 +15,7 @@
 		21689A901F95C49D004B03BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21689A8E1F95C49D004B03BE /* LaunchScreen.storyboard */; };
 		21689A9B1F95C49D004B03BE /* Combo_NumericTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21689A9A1F95C49D004B03BE /* Combo_NumericTests.swift */; };
 		21689AA61F95C49D004B03BE /* Combo_NumericUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21689AA51F95C49D004B03BE /* Combo_NumericUITests.swift */; };
+		21731C261F98617A00C57A11 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731C251F98617A00C57A11 /* Utils.swift */; };
 		2A33EE9C1F971A49005E3949 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2A33EE9B1F971A49005E3949 /* LexicontextAssets.bundle */; };
 		2A33EE9E1F971A6F005E3949 /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A33EE9D1F971A6F005E3949 /* libLexicontext.a */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		21689AA11F95C49D004B03BE /* Combo_NumericUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Combo_NumericUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21689AA51F95C49D004B03BE /* Combo_NumericUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combo_NumericUITests.swift; sourceTree = "<group>"; };
 		21689AA71F95C49D004B03BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21731C251F98617A00C57A11 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2A33EE971F9718E4005E3949 /* libLexicontext.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLexicontext.a; sourceTree = "<group>"; };
 		2A33EE991F9719BA005E3949 /* Lexicontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lexicontext.h; sourceTree = "<group>"; };
 		2A33EE9A1F971A44005E3949 /* Lexicontext-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lexicontext-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				21689A8C1F95C49D004B03BE /* Assets.xcassets */,
 				21689A8E1F95C49D004B03BE /* LaunchScreen.storyboard */,
 				21689A911F95C49D004B03BE /* Info.plist */,
+				21731C251F98617A00C57A11 /* Utils.swift */,
 			);
 			path = Combo_Numeric;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				21689A861F95C49D004B03BE /* GameScene.swift in Sources */,
 				21689A881F95C49D004B03BE /* GameViewController.swift in Sources */,
 				21689A821F95C49D004B03BE /* AppDelegate.swift in Sources */,
+				21731C261F98617A00C57A11 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
