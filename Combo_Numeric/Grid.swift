@@ -4,7 +4,7 @@
 //
 //  Created by John He on 2017-10-18.
 //  Copyright 2017 AJ. All rights reserved.
-//
+
 import SpriteKit
 
 class Grid:SKSpriteNode {
