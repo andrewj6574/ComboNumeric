@@ -17,6 +17,7 @@ class GameScene: SKScene {
         return dictionary?.randomWord();
     }
     
+
 //    override func didMove(to view: SKView) {
 //        /* Setup your scene here */
 //        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
@@ -47,6 +48,7 @@ class GameScene: SKScene {
             
             grid.addChild(letter)
         }
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -62,6 +64,7 @@ class GameScene: SKScene {
             label.fontSize = 12
             label.text = String(Int(location.x)) + ", " + String(Int(location.y));
             label.text?.append(word ?? "")
+            label.text?.append(RandomCharacter());
             
             self.addChild(label)
             
