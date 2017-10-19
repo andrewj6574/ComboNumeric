@@ -72,10 +72,31 @@ class Grid:SKSpriteNode {
             else {
                 let x = size.width / 2 + position.x
                 let y = size.height / 2 - position.y
-                let row = Int(floor(x / blockSize))
-                let col = Int(floor(y / blockSize))
+                let row = Int(floor(y / blockSize))
+                let col = Int(floor(x / blockSize))
+                
+                appendAlphabetNode(row: row, col: col);
                 print("\(row) \(col)")
             }
         }
+    }
+    
+    func appendAlphabetNode(row: Int, col: Int) {
+        let letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        let x = randomInt(min: 0, max: 25);
+        print(letters[x]);
+
+        let letter = SKLabelNode(fontNamed: "ArialMT")
+        letter.text = letters[x]
+        letter.fontSize = 30
+        letter.fontColor = SKColor.white
+        letter.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        letter.position = self.gridPosition(row: row, col: col)
+        
+        self.addChild(letter)
+    }
+    
+    func randomInt(min: Int, max:Int) -> Int {
+        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
     }
 }
