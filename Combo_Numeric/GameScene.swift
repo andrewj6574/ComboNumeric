@@ -17,14 +17,26 @@ class GameScene: SKScene {
         return dictionary?.randomWord();
     }
     
-    override func didMove(to view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!"
-        myLabel.fontSize = 45
-        myLabel.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
-        
-        self.addChild(myLabel)
+//    override func didMove(to view: SKView) {
+//        /* Setup your scene here */
+//        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+//        myLabel.text = "Hello, World!"
+//        myLabel.fontSize = 45
+//        myLabel.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
+//        
+//        self.addChild(myLabel)
+//    }
+    
+    override func didMove(to: SKView) {
+        if let grid = Grid(blockSize: 40.0, rows:5, cols:5) {
+            grid.position = CGPoint (x:frame.midX, y:frame.midY)
+            addChild(grid)
+            
+            let gamePiece = SKSpriteNode(imageNamed: "Spaceship")
+            gamePiece.setScale(0.0625)
+            gamePiece.position = grid.gridPosition(row: 1, col: 0)
+            grid.addChild(gamePiece)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
