@@ -3,7 +3,8 @@
 //  Combo_Numeric
 //
 //  Created by John He on 2017-10-18.
-//
+//  Copyright 2017 AJ. All rights reserved.
+
 import SpriteKit
 
 class Grid:SKSpriteNode {
@@ -26,7 +27,7 @@ class Grid:SKSpriteNode {
         // Add 1 to the height and width to ensure the borders are within the sprite
         let size = CGSize(width: CGFloat(cols)*blockSize+1.0, height: CGFloat(rows)*blockSize+1.0)
         UIGraphicsBeginImageContext(size)
-        
+        	
         guard let context = UIGraphicsGetCurrentContext() else {
             return nil
         }
