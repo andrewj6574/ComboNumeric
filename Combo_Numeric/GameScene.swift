@@ -29,24 +29,42 @@ class GameScene: SKScene {
 //    }
     
     override func didMove(to: SKView) {
-        if let grid = Grid(blockSize: 65.0, rows:5, cols:5) {
-            grid.position = CGPoint (x:frame.midX, y:frame.midY)
-            addChild(grid)
-            
-            let gamePiece = SKSpriteNode(imageNamed: "Spaceship")
-            gamePiece.setScale(0.0625)
-            gamePiece.position = grid.gridPosition(row: 1, col: 0)
-            grid.addChild(gamePiece)
-            
-            let letter = SKLabelNode(fontNamed: "ArialMT")
-            letter.text = "Y"
-            letter.fontSize = 30
-            letter.fontColor = SKColor.white
-            letter.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-            letter.position = grid.gridPosition(row: 2, col: 0)
+//        if let grid = Grid(blockSize: 65.0, rows:5, cols:5) {
+//            grid.position = CGPoint (x:frame.midX, y:frame.midY)
+//            addChild(grid)
+//            
+//            let gamePiece = SKSpriteNode(imageNamed: "Spaceship")
+//            gamePiece.setScale(0.0625)
+//            gamePiece.position = grid.gridPosition(row: 1, col: 0)
+//            grid.addChild(gamePiece)
+//            
+//            let letter = SKLabelNode(fontNamed: "ArialMT")
+//            letter.text = "Y"
+//            letter.fontSize = 30
+//            letter.fontColor = SKColor.white
+//            letter.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+//            letter.position = grid.gridPosition(row: 2, col: 0)
+//
+//            
+//            grid.addChild(letter)
+//        }
+        
+        let rows = 5
+        let cols = 5
+        let tileSize = CGFloat(50);
+        let gridWidth = tileSize * CGFloat(cols);
+        let gridHeight = tileSize * CGFloat(rows);
 
-            
-            grid.addChild(letter)
+        let screenSize = UIScreen.main.bounds
+        let startX = (screenSize.width - gridWidth) / 2
+        let startY = (screenSize.height - gridHeight) / 2
+        for indexX in 0...cols {
+            for indexY in 0...rows {
+                if let tile = Tile(startOffsetX: startX, startOffsetY: startY, indexX: indexX, indexY: indexY, size: tileSize)
+                {
+                    addChild(tile);
+                }
+            }
         }
 
     }
@@ -56,17 +74,17 @@ class GameScene: SKScene {
         // obtain a referece to Lexicotext
         
         for touch in touches {
-            let location = touch.location(in: self)
-            let label = SKLabelNode(fontNamed:"Arial")
-            let word = getWord();
-            
-            label.position = location
-            label.fontSize = 12
-            label.text = String(Int(location.x)) + ", " + String(Int(location.y));
-            label.text?.append(word ?? "")
-            label.text?.append(RandomCharacter());
-            
-            self.addChild(label)
+//            let location = touch.location(in: self)
+//            let label = SKLabelNode(fontNamed:"Arial")
+//            let word = getWord();
+//            
+//            label.position = location
+//            label.fontSize = 12
+//            label.text = String(Int(location.x)) + ", " + String(Int(location.y));
+//            label.text?.append(word ?? "")
+//            label.text?.append(RandomCharacter());
+//            
+//            self.addChild(label)
             
 //            let sprite = SKSpriteNode(imageNamed:"Spaceship")
 //            
