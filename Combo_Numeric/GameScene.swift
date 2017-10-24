@@ -51,21 +51,28 @@ class GameScene: SKScene {
         
         let rows = 5
         let cols = 5
-        let tileSize = CGFloat(50);
-        let gridWidth = tileSize * CGFloat(cols);
-        let gridHeight = tileSize * CGFloat(rows);
-
-        let screenSize = UIScreen.main.bounds
-        let startX = (screenSize.width - gridWidth) / 2
-        let startY = (screenSize.height - gridHeight) / 2
-        for indexX in 0...cols {
-            for indexY in 0...rows {
-                if let tile = Tile(startOffsetX: startX, startOffsetY: startY, indexX: indexX, indexY: indexY, size: tileSize)
-                {
-                    addChild(tile);
-                }
-            }
+        let tileSize = CGFloat(60.0);
+        
+        if let grid = Grid(tileSize: tileSize, rows:rows, cols:cols) {
+            grid.position = CGPoint (x:frame.midX, y:frame.midY)
+            addChild(grid)
         }
+        
+        
+//        let gridWidth = tileSize * CGFloat(cols);
+//        let gridHeight = tileSize * CGFloat(rows);
+//
+//        let screenSize = UIScreen.main.bounds
+//        let startX = (screenSize.width - gridWidth) / 2
+//        let startY = (screenSize.height - gridHeight) / 2
+//        for indexX in 0...cols {
+//            for indexY in 0...rows {
+//                if let tile = Tile(startOffsetX: startX, startOffsetY: startY, indexX: indexX, indexY: indexY, size: tileSize)
+//                {
+//                    addChild(tile);
+//                }
+//            }
+//        }
 
     }
     
