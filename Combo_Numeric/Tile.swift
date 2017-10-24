@@ -16,6 +16,8 @@ class Tile : SKSpriteNode
     var m_indexY:Int!
     var m_Size:CGFloat!
     
+    var hasValue = false;
+    
     convenience init?(startOffsetX:CGFloat, startOffsetY:CGFloat, indexX:Int, indexY:Int, size:CGFloat)
     {
         guard let texture = Tile.Texture(size:size) else {
@@ -75,7 +77,10 @@ class Tile : SKSpriteNode
                 node.run(action)
             }
             else {
-                appendAlphabetNode(row: m_indexY, col: m_indexX)
+                
+                if (!self.hasValue) {
+                    appendAlphabetNode(row: m_indexY, col: m_indexX)
+                }
             }
         }
     }
@@ -91,6 +96,7 @@ class Tile : SKSpriteNode
         letter.fontColor = SKColor.white
         letter.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         
+        self.hasValue = true
         self.addChild(letter)
     }
     
