@@ -15,6 +15,7 @@ class Tile : SKSpriteNode
     var m_indexX:Int!
     var m_indexY:Int!
     var m_Size:CGFloat!
+    var m_LetterLabel:SKLabelNode?
     
     var hasValue = false;
     
@@ -23,7 +24,7 @@ class Tile : SKSpriteNode
         guard let texture = Tile.Texture(size:size) else {
             return nil
         }
-        self.init(texture: texture, color:SKColor.clear, size:texture.size())
+        self.init(texture: texture, color:SKColor.blue, size:texture.size())
         self.isUserInteractionEnabled = true
         self.m_startOffsetX = startOffsetX
         self.m_startOffsetY = startOffsetY
@@ -34,6 +35,8 @@ class Tile : SKSpriteNode
         let posX = startOffsetX + CGFloat(indexX) * size;
         let posY = startOffsetY + CGFloat(indexY) * size;
         position = CGPoint(x: posX, y: posY);
+        
+        appendAlphabetNode(row: m_indexY, col: m_indexX);	
     }
     
     class func Texture(size:CGFloat) -> SKTexture?
@@ -68,20 +71,28 @@ class Tile : SKSpriteNode
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let position = touch.location(in:self)
-            let node = atPoint(position)
+//            let position = touch.location(in:self)
+//            let node = atPoint(position)
             print(String(m_indexX) + ", " + String(m_indexY))
 
-            if node != self {
-                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
-                node.run(action)
-            }
-            else {
-                
-                if (!self.hasValue) {
-                    appendAlphabetNode(row: m_indexY, col: m_indexX)
-                }
-            }
+            let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
+//            self.run(action)
+            self.m_LetterLabel?.run(action);
+            
+            let colorizeAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 1)
+            self.m_LetterLabel?.run(colorizeAction)
+            self.run(colorizeAction)
+
+//            if node != self {
+//                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
+//                node.run(action)
+//            }
+//            else {
+//                
+//                if (!self.hasValue) {
+//                    appendAlphabetNode(row: m_indexY, col: m_indexX)
+//                }
+//            }
         }
     }
     
@@ -90,14 +101,15 @@ class Tile : SKSpriteNode
         let x = randomInt(min: 0, max: 25);
         print(letters[x]);
         
-        let letter = SKLabelNode(fontNamed: "ArialMT")
-        letter.text = letters[x]
-        letter.fontSize = 30
-        letter.fontColor = SKColor.white
-        letter.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        m_LetterLabel = SKLabelNode(fontNamed: "ArialMT")
+        m_LetterLabel?.text = letters[x]
+        m_LetterLabel?.fontSize = 30
+        m_LetterLabel?.fontColor = SKColor.white
+        m_LetterLabel?.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        m_LetterLabel?.isUserInteractionEnabled = false
         
         self.hasValue = true
-        self.addChild(letter)
+        self.addChild(m_LetterLabel!)
     }
     
     func randomInt(min: Int, max:Int) -> Int {
