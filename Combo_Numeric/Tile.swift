@@ -10,27 +10,31 @@ import SpriteKit
 
 class Tile : SKSpriteNode
 {
+    var m_Grid:Grid?
     var m_startOffsetX:CGFloat!
     var m_startOffsetY:CGFloat!
     var m_indexX:Int!
     var m_indexY:Int!
     var m_Size:CGFloat!
     var m_LetterLabel:SKLabelNode?
+    var m_Active:Bool!
     
-    var hasValue = false;
+    var hasValue = false
     
-    convenience init?(startOffsetX:CGFloat, startOffsetY:CGFloat, indexX:Int, indexY:Int, size:CGFloat)
+    convenience init?(grid:Grid, startOffsetX:CGFloat, startOffsetY:CGFloat, indexX:Int, indexY:Int, size:CGFloat)
     {
         guard let texture = Tile.Texture(size:size) else {
             return nil
         }
         self.init(texture: texture, color:SKColor.blue, size:texture.size())
         self.isUserInteractionEnabled = true
+        self.m_Grid = grid
         self.m_startOffsetX = startOffsetX
         self.m_startOffsetY = startOffsetY
         self.m_indexX = indexX;
         self.m_indexY = indexY;
         self.m_Size = size
+        self.m_Active = false
         
         let posX = startOffsetX + CGFloat(indexX) * size;
         let posY = startOffsetY + CGFloat(indexY) * size;
@@ -73,16 +77,21 @@ class Tile : SKSpriteNode
         for touch in touches {
 //            let position = touch.location(in:self)
 //            let node = atPoint(position)
-            print(String(m_indexX) + ", " + String(m_indexY))
-
-            let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
-//            self.run(action)
-            self.m_LetterLabel?.run(action);
             
-            let colorizeAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 1)
-            self.m_LetterLabel?.run(colorizeAction)
-            self.run(colorizeAction)
-
+            if (!m_Active!) {
+                m_Active = true;
+                print(String(m_indexX) + ", " + String(m_indexY))
+                
+                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
+                //            self.run(action)
+                self.m_LetterLabel?.run(action);
+                
+                let colorizeAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 1)
+                self.m_LetterLabel?.run(colorizeAction)
+                self.run(colorizeAction)
+                
+                m_Grid?.addToActiveTileList(tile: self)
+            }
 //            if node != self {
 //                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
 //                node.run(action)
@@ -94,6 +103,15 @@ class Tile : SKSpriteNode
 //                }
 //            }
         }
+    }
+    
+    func setActive(flag: Bool) {
+        m_Active = flag
+    }
+    
+    func reinit() {
+        m_LetterLabel?.color = SKColor.white
+        self.color = SKColor.white
     }
     
     func appendAlphabetNode(row: Int, col: Int) {
