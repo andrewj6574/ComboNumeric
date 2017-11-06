@@ -12,6 +12,7 @@ class Grid:SKSpriteNode {
     var cols:Int!
     var tileSize:CGFloat!
     var backspaceButton:Button!
+    var word:SKLabelNode!
     
     var m_ActiveTiles = [Tile]()
     
@@ -24,6 +25,11 @@ class Grid:SKSpriteNode {
         self.tileSize = tileSize
         self.rows = rows
         self.cols = cols
+        self.word = SKLabelNode(fontNamed:"Chalkduster")
+        word.text = ""
+        word.fontSize = 45
+        word.position = CGPoint(x:self.frame.midX, y: self.frame.midY - UIScreen.main.bounds.height / CGFloat(4) - 30)
+        self.addChild(word)
         
         if let backspaceButton = Button(text: "<", posX: 0, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: backspaceButtonPressed) {
             addChild(backspaceButton)
@@ -70,16 +76,6 @@ class Grid:SKSpriteNode {
         return SKTexture(image: image!)
     }
     
-    func backspaceButtonPressed() {
-        print("backspace button callback")
-        if !m_ActiveTiles.isEmpty {
-            let tile = m_ActiveTiles.removeLast()
-            tile.setActive(flag: false)
-            tile.reinit()
-        }
-        
-    }
-    
     func addTiles() {
         
         let gridWidth = tileSize * CGFloat(cols);
@@ -105,8 +101,20 @@ class Grid:SKSpriteNode {
         return CGPoint(x:x, y:y)
     }
     
+    func backspaceButtonPressed() {
+        print("backspace button callback")
+        if !m_ActiveTiles.isEmpty {
+            let tile = m_ActiveTiles.removeLast()
+            tile.setActive(flag: false)
+            tile.reinit()
+            word.text = word.text?.substring(to: (word.text?.index(before: (word.text?.endIndex)!))!)
+        }
+        
+    }
+    
     func addToActiveTileList(tile: Tile) {
         m_ActiveTiles.append(tile)
+        word.text = word.text! + (tile.m_LetterLabel?.text)!
         print("active tile added")
     }
     

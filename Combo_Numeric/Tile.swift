@@ -110,6 +110,9 @@ class Tile : SKSpriteNode
     }
     
     func reinit() {
+        self.removeAllActions()
+        m_LetterLabel?.removeAllActions()
+        m_LetterLabel?.zRotation = 0
         m_LetterLabel?.color = SKColor.white
         self.color = SKColor.white
     }
