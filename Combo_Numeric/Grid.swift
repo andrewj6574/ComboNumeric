@@ -12,9 +12,12 @@ class Grid:SKSpriteNode {
     var cols:Int!
     var tileSize:CGFloat!
     var backspaceButton:Button!
+    var clearButton:Button!
+    var refreshGridButton:Button!
     var word:SKLabelNode!
     
     var m_ActiveTiles = [Tile]()
+    var m_Tiles = [Tile]()
     
     convenience init?(tileSize:CGFloat,rows:Int,cols:Int) {
         guard let texture = Grid.gridTexture(tileSize: tileSize,rows: rows, cols:cols) else {
@@ -35,6 +38,14 @@ class Grid:SKSpriteNode {
             addChild(backspaceButton)
         }
         
+        if let clearButton = Button(text: "C", posX: 60, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: clearButtonPressed) {
+            addChild(clearButton)
+        }
+
+        if let refreshGridButton = Button(text: "R", posX: -60, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: refreshGridButtonPressed) {
+            addChild(refreshGridButton)
+        }
+
         self.addTiles()
     }
     
@@ -88,6 +99,7 @@ class Grid:SKSpriteNode {
             for indexY in 0...(rows-1) {
                 if let tile = Tile(grid: self, startOffsetX: startX, startOffsetY: startY, indexX: indexX, indexY: indexY, size: tileSize)
                 {
+                    m_Tiles.append(tile)
                     addChild(tile);
                 }
             }
@@ -107,9 +119,27 @@ class Grid:SKSpriteNode {
             let tile = m_ActiveTiles.removeLast()
             tile.setActive(flag: false)
             tile.reinit()
-            word.text = word.text?.substring(to: (word.text?.index(before: (word.text?.endIndex)!))!)
+            if !(word.text?.isEmpty)! {
+                word.text = word.text?.substring(to: (word.text?.index(before: (word.text?.endIndex)!))!)
+            }
         }
-        
+    }
+    
+    func clearButtonPressed() {
+        for tile in m_ActiveTiles {
+            tile.setActive(flag: false)
+            tile.reinit()
+        }
+        word.text = ""
+    }
+    
+    func refreshGridButtonPressed() {
+        for tile in m_Tiles {
+            tile.setActive(flag: false)
+            tile.reinit()
+            tile.refreshLetter()
+        }
+        word.text = ""
     }
     
     func addToActiveTileList(tile: Tile) {

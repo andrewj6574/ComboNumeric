@@ -14,21 +14,22 @@ class Button : SKSpriteNode
     var m_Grid:Grid?
     var m_Size:CGFloat!
     var m_Active:Bool!
+    var m_Text:SKLabelNode!
     var m_Callback: (() -> Void)!
     
     convenience init?(text:String, posX:Int, posY:Int, size:CGFloat, callback: @escaping () -> Void)
     {
-        guard let texture = Tile.Texture(size:size) else {
+        guard let texture = Button.Texture(size:size) else {
             return nil
         }
         self.init(texture: texture, color:SKColor.blue, size:texture.size())
+        
         self.isUserInteractionEnabled = true
         self.m_Size = size
         self.m_Active = false
         self.m_Callback = callback
         
         position = CGPoint(x: posX, y: posY);
-        
         setText(text: text)
     }
     
@@ -70,14 +71,14 @@ class Button : SKSpriteNode
     }
     
     func setText(text: String) {
-        let textLabel = SKLabelNode(fontNamed: "ArialMT")
-        textLabel.text = text
-        textLabel.fontSize = 30
-        textLabel.fontColor = SKColor.white
-        textLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        textLabel.isUserInteractionEnabled = false
+        let m_Text = SKLabelNode(fontNamed: "ArialMT")
+        m_Text.text = text
+        m_Text.fontSize = 30
+        m_Text.fontColor = SKColor.white
+        m_Text.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        m_Text.isUserInteractionEnabled = false
         
-        self.addChild(textLabel)
+        self.addChild(m_Text)
     }
     
 }

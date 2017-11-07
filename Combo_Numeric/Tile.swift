@@ -117,13 +117,13 @@ class Tile : SKSpriteNode
         self.color = SKColor.white
     }
     
+    func refreshLetter() {
+        m_LetterLabel?.text = getRandomLetter()
+    }
+    
     func appendAlphabetNode(row: Int, col: Int) {
-        let letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-        let x = randomInt(min: 0, max: 25);
-        print(letters[x]);
-        
         m_LetterLabel = SKLabelNode(fontNamed: "ArialMT")
-        m_LetterLabel?.text = letters[x]
+        m_LetterLabel?.text = getRandomLetter()
         m_LetterLabel?.fontSize = 30
         m_LetterLabel?.fontColor = SKColor.white
         m_LetterLabel?.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -135,6 +135,12 @@ class Tile : SKSpriteNode
     
     func randomInt(min: Int, max:Int) -> Int {
         return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    }
+    
+    func getRandomLetter() -> String {
+        let letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+        let x = randomInt(min: 0, max: 25);
+        return letters[x]
     }
     
 }
