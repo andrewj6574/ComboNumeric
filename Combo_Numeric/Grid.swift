@@ -11,6 +11,13 @@ class Grid:SKSpriteNode {
     var rows:Int!
     var cols:Int!
     var tileSize:CGFloat!
+    var backspaceButton:Button!
+    var clearButton:Button!
+    var refreshGridButton:Button!
+    var word:SKLabelNode!
+    
+    var m_ActiveTiles = [Tile]()
+    var m_Tiles = [Tile]()
     
     convenience init?(tileSize:CGFloat,rows:Int,cols:Int) {
         guard let texture = Grid.gridTexture(tileSize: tileSize,rows: rows, cols:cols) else {
@@ -21,7 +28,24 @@ class Grid:SKSpriteNode {
         self.tileSize = tileSize
         self.rows = rows
         self.cols = cols
+        self.word = SKLabelNode(fontNamed:"Chalkduster")
+        word.text = ""
+        word.fontSize = 45
+        word.position = CGPoint(x:self.frame.midX, y: self.frame.midY - UIScreen.main.bounds.height / CGFloat(4) - 30)
+        self.addChild(word)
         
+        if let backspaceButton = Button(text: "<", posX: 0, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: backspaceButtonPressed) {
+            addChild(backspaceButton)
+        }
+        
+        if let clearButton = Button(text: "C", posX: 60, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: clearButtonPressed) {
+            addChild(clearButton)
+        }
+
+        if let refreshGridButton = Button(text: "R", posX: -60, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: refreshGridButtonPressed) {
+            addChild(refreshGridButton)
+        }
+
         self.addTiles()
     }
     
@@ -73,8 +97,9 @@ class Grid:SKSpriteNode {
         let startY = frame.midY - (gridHeight/2.5)
         for indexX in 0...(cols-1) {
             for indexY in 0...(rows-1) {
-                if let tile = Tile(startOffsetX: startX, startOffsetY: startY, indexX: indexX, indexY: indexY, size: tileSize)
+                if let tile = Tile(grid: self, startOffsetX: startX, startOffsetY: startY, indexX: indexX, indexY: indexY, size: tileSize)
                 {
+                    m_Tiles.append(tile)
                     addChild(tile);
                 }
             }
@@ -88,25 +113,60 @@ class Grid:SKSpriteNode {
         return CGPoint(x:x, y:y)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let position = touch.location(in:self)
-            let node = atPoint(position)
-            if node != self {
-                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
-                node.run(action)
-            }
-            else {
-                let x = size.width / 2 + position.x
-                let y = size.height / 2 - position.y
-                let row = Int(floor(y / tileSize))
-                let col = Int(floor(x / tileSize))
-                
-                appendAlphabetNode(row: row, col: col);
-                print("\(row) \(col)")
+    func backspaceButtonPressed() {
+        print("backspace button callback")
+        if !m_ActiveTiles.isEmpty {
+            let tile = m_ActiveTiles.removeLast()
+            tile.setActive(flag: false)
+            tile.reinit()
+            if !(word.text?.isEmpty)! {
+                word.text = word.text?.substring(to: (word.text?.index(before: (word.text?.endIndex)!))!)
             }
         }
     }
+    
+    func clearButtonPressed() {
+        for tile in m_ActiveTiles {
+            tile.setActive(flag: false)
+            tile.reinit()
+        }
+        word.text = ""
+    }
+    
+    func refreshGridButtonPressed() {
+        for tile in m_Tiles {
+            tile.setActive(flag: false)
+            tile.reinit()
+            tile.refreshLetter()
+        }
+        word.text = ""
+    }
+    
+    func addToActiveTileList(tile: Tile) {
+        m_ActiveTiles.append(tile)
+        word.text = word.text! + (tile.m_LetterLabel?.text)!
+        print("active tile added")
+    }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        for touch in touches {
+//            let position = touch.location(in:self)
+//            let node = atPoint(position)
+//            if node != self {
+//                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
+//                node.run(action)
+//            }
+//            else {
+//                let x = size.width / 2 + position.x
+//                let y = size.height / 2 - position.y
+//                let row = Int(floor(y / tileSize))
+//                let col = Int(floor(x / tileSize))
+//                
+//                appendAlphabetNode(row: row, col: col);
+//                print("\(row) \(col)")
+//            }
+//        }
+//    }
     
     func appendAlphabetNode(row: Int, col: Int) {
         let letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
