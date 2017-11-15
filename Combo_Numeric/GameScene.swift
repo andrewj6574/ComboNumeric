@@ -16,7 +16,6 @@ class GameScene: SKScene {
     private func getWord() -> String? {
         return dictionary?.randomWord();
     }
-    
 
 //    override func didMove(to view: SKView) {
 //        /* Setup your scene here */
