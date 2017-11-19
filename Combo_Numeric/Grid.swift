@@ -8,6 +8,14 @@
 import SpriteKit
 import UIKit
 
+
+extension Double {
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
+}
+
+
 class Grid:SKSpriteNode {
     var rows:Int!
     var cols:Int!
@@ -17,13 +25,17 @@ class Grid:SKSpriteNode {
     var refreshGridButton:Button!
     var word:SKLabelNode!
     var score:SKLabelNode!
+
+    var timer = Timer()
+    var timerLabel:SKLabelNode!
+    var timerLabelCount:Double!
     
     var m_ActiveTiles = [Tile]()
     var m_Tiles = [Tile]()
     
 //    var dictionary = Lexicontext.sharedDictionary();
     var textChecker = UITextChecker();
- 
+
     convenience init?(tileSize:CGFloat,rows:Int,cols:Int) {
         guard let texture = Grid.gridTexture(tileSize: tileSize,rows: rows, cols:cols) else {
             return nil
@@ -64,7 +76,14 @@ class Grid:SKSpriteNode {
             addChild(enterButton)
         }
         
-
+        self.timerLabel = SKLabelNode(fontNamed: "ArialMT")
+        timerLabelCount = 60
+        timerLabel.text = String(timerLabelCount)
+        timerLabel.position = CGPoint(x:UIScreen.main.bounds.width / CGFloat(2) - 50, y: UIScreen.main.bounds.height / CGFloat(2) - 30)
+        self.addChild(timerLabel)
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        
         self.addTiles()
     }
     
@@ -194,7 +213,12 @@ class Grid:SKSpriteNode {
         score.text = scoreArray[0] + ": " + String(theScore!);
         
     }
-    
+
+    // called every time interval from the timer
+    func timerAction() {
+        timerLabelCount! -= 0.1
+        timerLabel.text = timerLabelCount.format(f : ".0")
+    }
     
     func addToActiveTileList(tile: Tile) {
         m_ActiveTiles.append(tile)
@@ -207,7 +231,7 @@ class Grid:SKSpriteNode {
         var range = NSRange(location: 0,length: w.characters.count)
         var misspelledRange: NSRange = textChecker.rangeOfMisspelledWord(in: w, range: range, startingAt: 0, wrap: false, language: "en_US")
 //        var result = UITextChecker.hasLearnedWord(word.text!.lowercased());
-        return misspelledRange.toRange() == nil;
+        return misspelledRange.toRange() == nil && w.characters.count > 1;
     }
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        for touch in touches {
