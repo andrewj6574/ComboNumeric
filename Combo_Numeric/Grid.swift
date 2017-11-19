@@ -213,6 +213,9 @@ class Grid:SKSpriteNode {
         theScore = theScore! + 1;
         
         score.text = scoreArray[0] + ": " + String(theScore!);
+        var w = word.text!
+        let len = w.characters.count
+        timerLabelCount! += Double(len)
         
     }
 
@@ -221,7 +224,7 @@ class Grid:SKSpriteNode {
         timerLabelCount! -= 0.1
         timerLabel.text = timerLabelCount.format(f : ".0")
         
-        if (timerLabelCount! < 0)
+        if (timerLabelCount! <= 0)
         {
             print(String(timerLabelCount!))
             endGame()
