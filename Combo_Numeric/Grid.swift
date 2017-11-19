@@ -85,6 +85,8 @@ class Grid:SKSpriteNode {
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         
         self.addTiles()
+        
+        print("Init Grid")
     }
     
     class func gridTexture(tileSize:CGFloat,rows:Int,cols:Int) -> SKTexture? {
@@ -218,6 +220,26 @@ class Grid:SKSpriteNode {
     func timerAction() {
         timerLabelCount! -= 0.1
         timerLabel.text = timerLabelCount.format(f : ".0")
+        
+        if (timerLabelCount! < 0)
+        {
+            print(String(timerLabelCount!))
+            endGame()
+        }
+    }
+    
+    func endGame()
+    {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            
+            timer.invalidate()
+            topController.dismiss(animated: true, completion: {})
+        }
+        
+
     }
     
     func addToActiveTileList(tile: Tile) {
@@ -228,8 +250,8 @@ class Grid:SKSpriteNode {
     
     public func wordIsValid() -> Bool! {
         var w = word.text!.lowercased()
-        var range = NSRange(location: 0,length: w.characters.count)
-        var misspelledRange: NSRange = textChecker.rangeOfMisspelledWord(in: w, range: range, startingAt: 0, wrap: false, language: "en_US")
+        let range = NSRange(location: 0,length: w.characters.count)
+        let misspelledRange: NSRange = textChecker.rangeOfMisspelledWord(in: w, range: range, startingAt: 0, wrap: false, language: "en_US")
 //        var result = UITextChecker.hasLearnedWord(word.text!.lowercased());
         return misspelledRange.toRange() == nil && w.characters.count > 1;
     }
