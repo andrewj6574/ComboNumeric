@@ -6,6 +6,7 @@
 //  Copyright 2017 AJ. All rights reserved.
 
 import SpriteKit
+import UIKit
 
 class Grid:SKSpriteNode {
     var rows:Int!
@@ -15,10 +16,14 @@ class Grid:SKSpriteNode {
     var clearButton:Button!
     var refreshGridButton:Button!
     var word:SKLabelNode!
+    var score:SKLabelNode!
     
     var m_ActiveTiles = [Tile]()
     var m_Tiles = [Tile]()
     
+//    var dictionary = Lexicontext.sharedDictionary();
+    var textChecker = UITextChecker();
+ 
     convenience init?(tileSize:CGFloat,rows:Int,cols:Int) {
         guard let texture = Grid.gridTexture(tileSize: tileSize,rows: rows, cols:cols) else {
             return nil
@@ -32,19 +37,33 @@ class Grid:SKSpriteNode {
         word.text = ""
         word.fontSize = 45
         word.position = CGPoint(x:self.frame.midX, y: self.frame.midY - UIScreen.main.bounds.height / CGFloat(4) - 30)
-        self.addChild(word)
         
-        if let backspaceButton = Button(text: "<", posX: 0, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: backspaceButtonPressed) {
+        self.addChild(word)
+
+        self.score = SKLabelNode(fontNamed:"ArialMT")
+        score.text = "Score: 0"
+        score.fontSize = 30
+        score.position = CGPoint(x:self.frame.midX, y: self.frame.midY + UIScreen.main.bounds.height / CGFloat(4) + 50)
+        
+        self.addChild(score)
+
+        
+        if let backspaceButton = Button(text: "<", posX: -40, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: backspaceButtonPressed) {
             addChild(backspaceButton)
         }
         
-        if let clearButton = Button(text: "C", posX: 60, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: clearButtonPressed) {
+        if let clearButton = Button(text: "C", posX: 20, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: clearButtonPressed) {
             addChild(clearButton)
         }
 
-        if let refreshGridButton = Button(text: "R", posX: -60, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: refreshGridButtonPressed) {
+        if let refreshGridButton = Button(text: "R", posX: -100, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: refreshGridButtonPressed) {
             addChild(refreshGridButton)
         }
+        
+        if let enterButton = Button(text: "Enter", posX: 100, posY: Int(UIScreen.main.bounds.height / CGFloat(4) + 10 ), size: 50, callback: enterButtonPressed) {
+            addChild(enterButton)
+        }
+        
 
         self.addTiles()
     }
@@ -126,6 +145,10 @@ class Grid:SKSpriteNode {
     }
     
     func clearButtonPressed() {
+        clearCurrentWord();
+    }
+    
+    func clearCurrentWord() {
         for tile in m_ActiveTiles {
             tile.setActive(flag: false)
             tile.reinit()
@@ -142,12 +165,56 @@ class Grid:SKSpriteNode {
         word.text = ""
     }
     
+    func refreshActivatedTiles() {
+        for tile in m_Tiles {
+            if (tile.getActive()!) {
+                tile.reinit()
+                tile.refreshLetter()
+            }
+        }
+    }
+    
+    func enterButtonPressed() {
+        
+        if (wordIsValid()!) {
+            increaseScore();
+            refreshActivatedTiles();
+            clearCurrentWord();
+        }
+    }
+    
+    func increaseScore() {
+        var scoreArray = score.text!.components(separatedBy: ": ")
+        var theScore = Int(scoreArray[1])
+        theScore = theScore! + 1;
+        
+        score.text = scoreArray[0] + ": " + String(theScore!);
+        
+    }
+    
+    
     func addToActiveTileList(tile: Tile) {
         m_ActiveTiles.append(tile)
         word.text = word.text! + (tile.m_LetterLabel?.text)!
         print("active tile added")
     }
     
+    public func wordIsValid() -> Bool! {
+        var isValid = false
+        
+        if (word.text != nil) {
+            var w = word.text!.lowercased()
+            
+            if (w.characters.count > 1) {
+                let range = NSRange(location: 0,length: w.characters.count)
+                let misspelledRange: NSRange = textChecker.rangeOfMisspelledWord(in: w, range: range, startingAt: 0, wrap: false, language: "en_US")
+                //        var result = UITextChecker.hasLearnedWord(word.text!.lowercased());
+                isValid = misspelledRange.toRange() == nil;
+            }
+            
+        }
+        return isValid
+    }
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        for touch in touches {
 //            let position = touch.location(in:self)

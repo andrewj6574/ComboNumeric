@@ -109,6 +109,10 @@ class Tile : SKSpriteNode
         m_Active = flag
     }
     
+    func getActive() -> Bool! {
+        return m_Active;
+    }
+    
     func reinit() {
         self.removeAllActions()
         m_LetterLabel?.removeAllActions()
