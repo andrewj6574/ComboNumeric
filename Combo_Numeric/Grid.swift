@@ -177,11 +177,8 @@ class Grid:SKSpriteNode {
     func enterButtonPressed() {
         
         if (wordIsValid()!) {
-//            print(word.text!.lowercased());
             increaseScore();
-            
             refreshActivatedTiles();
-            
             clearCurrentWord();
         }
     }
@@ -203,11 +200,20 @@ class Grid:SKSpriteNode {
     }
     
     public func wordIsValid() -> Bool! {
-        var w = word.text!.lowercased()
-        var range = NSRange(location: 0,length: w.characters.count)
-        var misspelledRange: NSRange = textChecker.rangeOfMisspelledWord(in: w, range: range, startingAt: 0, wrap: false, language: "en_US")
-//        var result = UITextChecker.hasLearnedWord(word.text!.lowercased());
-        return misspelledRange.toRange() == nil;
+        var isValid = false
+        
+        if (word.text != nil) {
+            var w = word.text!.lowercased()
+            
+            if (w.characters.count > 1) {
+                let range = NSRange(location: 0,length: w.characters.count)
+                let misspelledRange: NSRange = textChecker.rangeOfMisspelledWord(in: w, range: range, startingAt: 0, wrap: false, language: "en_US")
+                //        var result = UITextChecker.hasLearnedWord(word.text!.lowercased());
+                isValid = misspelledRange.toRange() == nil;
+            }
+            
+        }
+        return isValid
     }
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        for touch in touches {
