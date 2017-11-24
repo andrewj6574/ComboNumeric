@@ -8,6 +8,14 @@
 import SpriteKit
 import UIKit
 
+
+extension Double {
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
+}
+
+
 class Grid:SKSpriteNode {
     var rows:Int!
     var cols:Int!
@@ -17,13 +25,17 @@ class Grid:SKSpriteNode {
     var refreshGridButton:Button!
     var word:SKLabelNode!
     var score:SKLabelNode!
+
+    var timer = Timer()
+    var timerLabel:SKLabelNode!
+    var timerLabelCount:Double!
     
     var m_ActiveTiles = [Tile]()
     var m_Tiles = [Tile]()
     
 //    var dictionary = Lexicontext.sharedDictionary();
     var textChecker = UITextChecker();
- 
+
     convenience init?(tileSize:CGFloat,rows:Int,cols:Int) {
         guard let texture = Grid.gridTexture(tileSize: tileSize,rows: rows, cols:cols) else {
             return nil
@@ -64,8 +76,17 @@ class Grid:SKSpriteNode {
             addChild(enterButton)
         }
         
-
+        self.timerLabel = SKLabelNode(fontNamed: "ArialMT")
+        timerLabelCount = 60
+        timerLabel.text = String(timerLabelCount)
+        timerLabel.position = CGPoint(x:UIScreen.main.bounds.width / CGFloat(2) - 50, y: UIScreen.main.bounds.height / CGFloat(2) - 30)
+        self.addChild(timerLabel)
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        
         self.addTiles()
+        
+        print("Init Grid")
     }
     
     class func gridTexture(tileSize:CGFloat,rows:Int,cols:Int) -> SKTexture? {
@@ -189,9 +210,37 @@ class Grid:SKSpriteNode {
         theScore = theScore! + 1;
         
         score.text = scoreArray[0] + ": " + String(theScore!);
+        var w = word.text!
+        let len = w.characters.count
+        timerLabelCount! += Double(len)
         
     }
+
+    // called every time interval from the timer
+    func timerAction() {
+        timerLabelCount! -= 0.1
+        timerLabel.text = timerLabelCount.format(f : ".0")
+        
+        if (timerLabelCount! <= 0)
+        {
+            print(String(timerLabelCount!))
+            endGame()
+        }
+    }
     
+    func endGame()
+    {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            
+            timer.invalidate()
+            topController.dismiss(animated: true, completion: {})
+        }
+        
+
+    }
     
     func addToActiveTileList(tile: Tile) {
         m_ActiveTiles.append(tile)
@@ -201,20 +250,19 @@ class Grid:SKSpriteNode {
     
     public func wordIsValid() -> Bool! {
         var isValid = false
-        
+       
         if (word.text != nil) {
-            var w = word.text!.lowercased()
-            
+            var w = word.text!.lowercased()     
             if (w.characters.count > 1) {
                 let range = NSRange(location: 0,length: w.characters.count)
                 let misspelledRange: NSRange = textChecker.rangeOfMisspelledWord(in: w, range: range, startingAt: 0, wrap: false, language: "en_US")
                 //        var result = UITextChecker.hasLearnedWord(word.text!.lowercased());
                 isValid = misspelledRange.toRange() == nil;
             }
-            
         }
         return isValid
     }
+  
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        for touch in touches {
 //            let position = touch.location(in:self)
