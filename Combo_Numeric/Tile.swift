@@ -16,17 +16,15 @@ class Tile : SKSpriteNode
     var m_indexX:Int!
     var m_indexY:Int!
     var m_Size:CGFloat!
-    var m_LetterLabel:SKLabelNode?
+    var m_LetterLabel:SKLabelNode!
     var m_Active:Bool!
+
     
     var hasValue = false
     
     convenience init?(grid:Grid, startOffsetX:CGFloat, startOffsetY:CGFloat, indexX:Int, indexY:Int, size:CGFloat)
     {
-        guard let texture = Tile.Texture(size:size) else {
-            return nil
-        }
-        self.init(texture: texture, color:SKColor.blue, size:texture.size())
+        self.init(imageNamed: "Tile")
         self.isUserInteractionEnabled = true
         self.m_Grid = grid
         self.m_startOffsetX = startOffsetX
@@ -36,35 +34,14 @@ class Tile : SKSpriteNode
         self.m_Size = size
         self.m_Active = false
         
+        self.m_LetterLabel = SKLabelNode(fontNamed: "ArialMT")
+        addChild(self.m_LetterLabel)
+        
         let posX = startOffsetX + CGFloat(indexX) * size;
         let posY = startOffsetY + CGFloat(indexY) * size;
         position = CGPoint(x: posX, y: posY);
         
         appendAlphabetNode(row: m_indexY, col: m_indexX);	
-    }
-    
-    class func Texture(size:CGFloat) -> SKTexture?
-    {
-        UIGraphicsBeginImageContext(CGSize(width:size, height:size))
-        
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return nil
-        }
-        
-        let bezierPath = UIBezierPath()
-        DrawLine(bez: bezierPath, sx: 0,    sy: 0,    ex:  0,   ey: size)
-        DrawLine(bez: bezierPath, sx: 0,    sy: 0,    ex: size, ey:  0)
-        DrawLine(bez: bezierPath, sx: size, sy: size, ex:  0,   ey: size)
-        DrawLine(bez: bezierPath, sx: size, sy: size, ex: size, ey:  0)
-
-        SKColor.white.setStroke()
-        bezierPath.lineWidth = 2.0
-        bezierPath.stroke()
-        context.addPath(bezierPath.cgPath)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return SKTexture(image: image!)
     }
     
     class func DrawLine(bez: UIBezierPath, sx: CGFloat, sy: CGFloat, ex: CGFloat, ey: CGFloat)
@@ -82,14 +59,11 @@ class Tile : SKSpriteNode
                 m_Active = true;
                 print(String(m_indexX) + ", " + String(m_indexY))
                 
-                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
-                //            self.run(action)
-                self.m_LetterLabel?.run(action);
-                
-                let colorizeAction = SKAction.colorize(with: UIColor.red, colorBlendFactor: 1, duration: 1)
-                self.m_LetterLabel?.run(colorizeAction)
+//                let action = SKAction.rotate(byAngle:CGFloat.pi*2, duration: 1)
+//                self.m_LetterLabel.run(action);
+                let colorizeAction = SKAction.colorize(with: UIColor.darkGray, colorBlendFactor: 1, duration: 0.1)
+                self.m_LetterLabel.fontColor = UIColor.white
                 self.run(colorizeAction)
-                
                 m_Grid?.addToActiveTileList(tile: self)
             }
 //            if node != self {
@@ -113,25 +87,41 @@ class Tile : SKSpriteNode
         return m_Active;
     }
     
-    func reinit() {
-        self.removeAllActions()
-        m_LetterLabel?.removeAllActions()
-        m_LetterLabel?.zRotation = 0
-        m_LetterLabel?.color = SKColor.white
+    func reinit(newWord:Bool = false) {
+        if (newWord) {
+            self.m_LetterLabel.text = getRandomLetter()
+            
+        }
+        self.m_LetterLabel.fontColor = SKColor.white
         self.color = SKColor.white
+        self.m_LetterLabel.zPosition = 100
+        self.removeAllActions()
+        self.m_LetterLabel.removeAllActions()
+
+    }
+    
+    func updateLetterNode(zRotation:Int = 0, color:SKColor = SKColor.white, text:String = "") {
+//        let updateText = SKAction.setValue(text, forKey: "text")
+          self.m_LetterLabel.text = text
+          self.m_LetterLabel.fontColor = color
+        
+//        self.m_LetterLabel.setValue(color, forKey: "color")
+//        self.m_LetterLabel.setValue(text, forKey: "text")
+//        self.m_LetterLabel.run(updateText)
     }
     
     func refreshLetter() {
-        m_LetterLabel?.text = getRandomLetter()
+        self.updateLetterNode(text: getRandomLetter())
+        
     }
     
     func appendAlphabetNode(row: Int, col: Int) {
-        m_LetterLabel = SKLabelNode(fontNamed: "ArialMT")
-        m_LetterLabel?.text = getRandomLetter()
-        m_LetterLabel?.fontSize = 30
-        m_LetterLabel?.fontColor = SKColor.white
-        m_LetterLabel?.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        m_LetterLabel?.isUserInteractionEnabled = false
+        self.m_LetterLabel = SKLabelNode(fontNamed: "ArialMT")
+        self.m_LetterLabel.text = getRandomLetter()
+        self.m_LetterLabel.fontSize = 30
+        self.m_LetterLabel.fontColor = SKColor.white
+        self.m_LetterLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        self.m_LetterLabel.isUserInteractionEnabled = false
         
         self.hasValue = true
         self.addChild(m_LetterLabel!)

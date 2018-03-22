@@ -110,7 +110,7 @@ class Grid:SKSpriteNode {
         
         let gridWidth = tileSize * CGFloat(cols);
         let gridHeight = tileSize * CGFloat(rows);
-
+        
         let screenSize = UIScreen.main.bounds
         let startX = frame.midX - (gridWidth/2.5)
         let startY = frame.midY - (gridHeight/2.5)
@@ -118,8 +118,11 @@ class Grid:SKSpriteNode {
             for indexY in 0...(rows-1) {
                 if let tile = Tile(grid: self, startOffsetX: startX, startOffsetY: startY, indexX: indexX, indexY: indexY, size: tileSize)
                 {
+                    tile.m_LetterLabel.text = tile.getRandomLetter()
+                    tile.m_LetterLabel.zPosition = 100
+                    
                     m_Tiles.append(tile)
-                    addChild(tile);
+                    self.addChild(tile);
                 }
             }
         }
@@ -157,10 +160,12 @@ class Grid:SKSpriteNode {
     }
     
     func refreshGridButtonPressed() {
+        print("refreshGridButtonPressed")
+
         for tile in m_Tiles {
             tile.setActive(flag: false)
-            tile.reinit()
-            tile.refreshLetter()
+            tile.reinit(newWord: true)
+//            tile.refreshLetter()
         }
         word.text = ""
     }
@@ -168,8 +173,8 @@ class Grid:SKSpriteNode {
     func refreshActivatedTiles() {
         for tile in m_Tiles {
             if (tile.getActive()!) {
-                tile.reinit()
-                tile.refreshLetter()
+                tile.reinit(newWord: true)
+//                tile.refreshLetter()
             }
         }
     }
