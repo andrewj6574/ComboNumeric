@@ -16,12 +16,14 @@ class Button : SKSpriteNode
     var m_Active:Bool!
     var m_Text:SKLabelNode!
     var m_Callback: (() -> Void)!
+    var imageNamed:String! = ""
     
     convenience init?(text:String, posX:Int, posY:Int, size:CGFloat, callback: @escaping () -> Void)
     {
         guard let texture = Button.Texture(size:size) else {
             return nil
         }
+        
         self.init(texture: texture, color:SKColor.blue, size:texture.size())
         
         self.isUserInteractionEnabled = true
@@ -31,6 +33,19 @@ class Button : SKSpriteNode
         
         position = CGPoint(x: posX, y: posY);
         setText(text: text)
+    }
+    
+    
+    convenience init?(imageNamed:String, posX:Int, posY:Int, callback: @escaping () -> Void)
+    {
+  
+        self.init(imageNamed:imageNamed)
+        
+        self.isUserInteractionEnabled = true
+        self.m_Active = false
+        self.m_Callback = callback
+        
+        position = CGPoint(x: posX, y: posY);
     }
     
     class func Texture(size:CGFloat) -> SKTexture?

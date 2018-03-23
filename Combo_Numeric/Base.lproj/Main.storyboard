@@ -21,26 +21,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBq-ot-Fei">
-                                <rect key="frame" x="138" y="16" width="98" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGJ-4v-s7Q">
+                                <rect key="frame" x="138" y="529" width="98" height="38"/>
                                 <state key="normal" image="End"/>
                                 <connections>
-                                    <segue destination="32U-84-Wby" kind="show" id="JqZ-sK-bYJ"/>
+                                    <action selector="endGameVC:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Wkm-EZ-skg"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RGJ-4v-s7Q" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="hLW-wB-aBP"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="RGJ-4v-s7Q" secondAttribute="bottom" constant="100" id="zZM-rV-dOs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="endButton" destination="RGJ-4v-s7Q" id="l42-0g-kz9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1694" y="-235"/>
+            <point key="canvasLocation" x="1737" y="-235"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="XXt-HW-6D4">
             <objects>
-                <viewController id="32U-84-Wby" sceneMemberID="viewController">
+                <viewController id="32U-84-Wby" customClass="ViewController" customModule="Combo_Numeric" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K4c-Ca-S1u"/>
                         <viewControllerLayoutGuide type="bottom" id="7Ks-D9-3lX"/>
@@ -49,18 +56,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CgY-eT-zgo">
-                                <rect key="frame" x="112" y="314" width="150" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CgY-eT-zgo">
+                                <rect key="frame" x="116" y="170" width="149.99999999999997" height="38.999999999999972"/>
                                 <state key="normal" image="Start"/>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="mhD-Ya-lFU"/>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="o2Q-8a-zpW"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CgY-eT-zgo" firstAttribute="centerX" secondItem="gcr-xy-eEo" secondAttribute="centerX" id="LpZ-Zh-jOM"/>
+                            <constraint firstItem="CgY-eT-zgo" firstAttribute="top" secondItem="K4c-Ca-S1u" secondAttribute="bottom" constant="150" id="XoC-uW-uCz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cNa-CT-hLg"/>
+                    <connections>
+                        <outlet property="startButton" destination="CgY-eT-zgo" id="v04-5Y-3mk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vvc-Nr-ubQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

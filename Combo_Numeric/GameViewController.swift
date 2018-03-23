@@ -9,37 +9,29 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UIViewControllerTransitioningDelegate{
+    
+    @IBOutlet weak var endButton: UIButton!
+    public var skView: SKView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let scene = GameScene(size: view.bounds.size)
-        let skView = view as! SKView
-
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
-        scene.scaleMode = .resizeFill
-        skView.presentScene(scene)
-//        super.viewDidLoad()
-//
-//        if let scene = GameScene(fileNamed:"GameScene") {
-//            // Configure the view.
-//            let skView = self.view as! SKView
-//            skView.showsFPS = true
-//            skView.showsNodeCount = true
-//            
-//            /* Sprite Kit applies additional optimizations to improve rendering performance */
-//            skView.ignoresSiblingOrder = true
-//            
-//            /* Set the scale mode to scale to fit the window */
-//            scene.scaleMode = .AspectFill
-//            
-//            skView.presentScene(scene)
-//        }
-    }
+        
+        if let scene = SKScene(fileNamed: "MenuScene") as? MenuScene {
+            scene.endButton = endButton
+            scene.isGameOver = false
+            scene.backgroundColor = UIColor(red:0.61, green:0.89, blue:0.94, alpha:1.0)
+            
+            skView = view as! SKView
+            skView.presentScene(scene)
+        }
     
-  
+    }
+
+    @IBAction func endGameVC(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     override var shouldAutorotate : Bool {
         return true
     }

@@ -17,6 +17,7 @@ class Grid:SKSpriteNode {
     var refreshGridButton:Button!
     var word:SKLabelNode!
     var score:SKLabelNode!
+    var scoreCount:Int = 0;
     
     var m_ActiveTiles = [Tile]()
     var m_Tiles = [Tile]()
@@ -42,28 +43,31 @@ class Grid:SKSpriteNode {
 
         self.score = SKLabelNode(fontNamed:"ArialMT")
         score.text = "Score: 0"
-        score.fontSize = 30
-        score.position = CGPoint(x:self.frame.midX, y: self.frame.midY + UIScreen.main.bounds.height / CGFloat(4) + 50)
+        score.fontSize = 15
+        score.position = CGPoint(x:-UIScreen.main.bounds.width / CGFloat(2) + 30 , y: UIScreen.main.bounds.height/CGFloat(2) - 30 )
         
         self.addChild(score)
-
         
-        if let backspaceButton = Button(text: "<", posX: -40, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: backspaceButtonPressed) {
-            addChild(backspaceButton)
-        }
-        
-        if let clearButton = Button(text: "C", posX: 20, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: clearButtonPressed) {
-            addChild(clearButton)
-        }
-
-        if let refreshGridButton = Button(text: "R", posX: -100, posY: Int(UIScreen.main.bounds.height / CGFloat(4)), size: 30, callback: refreshGridButtonPressed) {
+        if let refreshGridButton = Button(imageNamed: "refresh", posX: -120, posY: Int(UIScreen.main.bounds.height / CGFloat(4)).advanced(by: 8), callback: refreshGridButtonPressed) {
+            refreshGridButton.color = UIColor.white
             addChild(refreshGridButton)
         }
         
-        if let enterButton = Button(text: "Enter", posX: 100, posY: Int(UIScreen.main.bounds.height / CGFloat(4) + 10 ), size: 50, callback: enterButtonPressed) {
-            addChild(enterButton)
+        if let backspaceButton = Button( text: "<", posX: -62, posY: Int(UIScreen.main.bounds.height / CGFloat(4)).advanced(by: 8) , size: 40, callback: backspaceButtonPressed) {
+            addChild(backspaceButton)
         }
         
+        if let clearButton = Button(text: "C", posX: 0, posY: Int(UIScreen.main.bounds.height / CGFloat(4)).advanced(by: 8), size: 40, callback: clearButtonPressed) {
+            addChild(clearButton)
+        }
+        
+//        let colorize = SKAction.colorize(with: UIColor.white, colorBlendFactor: 1.0, duration: 5)
+//        refreshGridButton.run(colorize)
+        
+        if let enterButton = Button(text: "Enter", posX: 105, posY: Int(UIScreen.main.bounds.height / CGFloat(4)).advanced(by: 35), size: 100, callback: enterButtonPressed) {
+            addChild(enterButton)
+        }
+
 
         self.addTiles()
     }
@@ -189,12 +193,8 @@ class Grid:SKSpriteNode {
     }
     
     func increaseScore() {
-        var scoreArray = score.text!.components(separatedBy: ": ")
-        var theScore = Int(scoreArray[1])
-        theScore = theScore! + 1;
-        
-        score.text = scoreArray[0] + ": " + String(theScore!);
-        
+        scoreCount += 1
+        score.text =  "Score : \(scoreCount)";
     }
     
     

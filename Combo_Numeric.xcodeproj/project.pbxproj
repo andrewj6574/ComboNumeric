@@ -19,6 +19,11 @@
 		21689AA61F95C49D004B03BE /* Combo_NumericUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21689AA51F95C49D004B03BE /* Combo_NumericUITests.swift */; };
 		21731C261F98617A00C57A11 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731C251F98617A00C57A11 /* Utils.swift */; };
 		2A25AECF1F986A86008D3B7D /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25AECE1F986A86008D3B7D /* Grid.swift */; };
+		2A28F3972063547D00F285E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A28F3962063547D00F285E4 /* ViewController.swift */; };
+		2A28F399206359AD00F285E4 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A28F398206359AD00F285E4 /* CircularTransition.swift */; };
+		2A28F39B20637ACC00F285E4 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2A28F39A20637ACC00F285E4 /* GameScene.sks */; };
+		2A28F39F20637D4800F285E4 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2A28F39E20637D4800F285E4 /* MenuScene.sks */; };
+		2A28F3A12063812200F285E4 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A28F3A02063812200F285E4 /* MenuScene.swift */; };
 		2A33EE9C1F971A49005E3949 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2A33EE9B1F971A49005E3949 /* LexicontextAssets.bundle */; };
 		2A33EE9E1F971A6F005E3949 /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A33EE9D1F971A6F005E3949 /* libLexicontext.a */; };
 /* End PBXBuildFile section */
@@ -59,6 +64,11 @@
 		21689AA71F95C49D004B03BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21731C251F98617A00C57A11 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2A25AECE1F986A86008D3B7D /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		2A28F3962063547D00F285E4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
+		2A28F398206359AD00F285E4 /* CircularTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
+		2A28F39A20637ACC00F285E4 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		2A28F39E20637D4800F285E4 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
+		2A28F3A02063812200F285E4 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		2A33EE971F9718E4005E3949 /* libLexicontext.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLexicontext.a; sourceTree = "<group>"; };
 		2A33EE991F9719BA005E3949 /* Lexicontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lexicontext.h; sourceTree = "<group>"; };
 		2A33EE9A1F971A44005E3949 /* Lexicontext-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Lexicontext-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -116,20 +126,24 @@
 		21689A801F95C49D004B03BE /* Combo_Numeric */ = {
 			isa = PBXGroup;
 			children = (
+				2A28F3962063547D00F285E4 /* ViewController.swift */,
 				2A33EE9B1F971A49005E3949 /* LexicontextAssets.bundle */,
 				2A33EE9A1F971A44005E3949 /* Lexicontext-Bridging-Header.h */,
 				2A33EE991F9719BA005E3949 /* Lexicontext.h */,
 				21689A811F95C49D004B03BE /* AppDelegate.swift */,
-				21689A851F95C49D004B03BE /* GameScene.swift */,
 				21689A871F95C49D004B03BE /* GameViewController.swift */,
 				21689A891F95C49D004B03BE /* Main.storyboard */,
+				2A28F398206359AD00F285E4 /* CircularTransition.swift */,
 				21689A8C1F95C49D004B03BE /* Assets.xcassets */,
 				21689A8E1F95C49D004B03BE /* LaunchScreen.storyboard */,
+				2A28F39D20637CDB00F285E4 /* Game */,
 				21689A911F95C49D004B03BE /* Info.plist */,
 				2A25AECE1F986A86008D3B7D /* Grid.swift */,
 				21731C251F98617A00C57A11 /* Utils.swift */,
 				2103045E1F9D3EAA005BB669 /* Tile.swift */,
 				210304601FAFB904005BB669 /* Button.swift */,
+				2A28F39E20637D4800F285E4 /* MenuScene.sks */,
+				2A28F3A02063812200F285E4 /* MenuScene.swift */,
 			);
 			path = Combo_Numeric;
 			sourceTree = "<group>";
@@ -150,6 +164,15 @@
 				21689AA71F95C49D004B03BE /* Info.plist */,
 			);
 			path = Combo_NumericUITests;
+			sourceTree = "<group>";
+		};
+		2A28F39D20637CDB00F285E4 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				21689A851F95C49D004B03BE /* GameScene.swift */,
+				2A28F39A20637ACC00F285E4 /* GameScene.sks */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 		2A33EE961F9718E3005E3949 /* Frameworks */ = {
@@ -270,6 +293,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				21689A901F95C49D004B03BE /* LaunchScreen.storyboard in Resources */,
+				2A28F39F20637D4800F285E4 /* MenuScene.sks in Resources */,
+				2A28F39B20637ACC00F285E4 /* GameScene.sks in Resources */,
 				21689A8D1F95C49D004B03BE /* Assets.xcassets in Resources */,
 				2A33EE9C1F971A49005E3949 /* LexicontextAssets.bundle in Resources */,
 				21689A8B1F95C49D004B03BE /* Main.storyboard in Resources */,
@@ -298,11 +323,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				210304611FAFB904005BB669 /* Button.swift in Sources */,
+				2A28F399206359AD00F285E4 /* CircularTransition.swift in Sources */,
 				21689A861F95C49D004B03BE /* GameScene.swift in Sources */,
 				21689A881F95C49D004B03BE /* GameViewController.swift in Sources */,
 				21689A821F95C49D004B03BE /* AppDelegate.swift in Sources */,
 				2103045F1F9D3EAA005BB669 /* Tile.swift in Sources */,
 				2A25AECF1F986A86008D3B7D /* Grid.swift in Sources */,
+				2A28F3A12063812200F285E4 /* MenuScene.swift in Sources */,
+				2A28F3972063547D00F285E4 /* ViewController.swift in Sources */,
 				21731C261F98617A00C57A11 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +485,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PMA74ZT569;
 				INFOPLIST_FILE = Combo_Numeric/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -476,6 +505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PMA74ZT569;
 				INFOPLIST_FILE = Combo_Numeric/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
